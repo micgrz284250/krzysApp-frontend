@@ -33,8 +33,6 @@ const Krzys = ref({
 });
 fetchVitals();
 
-// ChartJS.register()
-
 async function fetchVitals() {
   try {
     const response = await fetch(`${API_URL}/vitals`);
