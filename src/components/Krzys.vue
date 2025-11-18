@@ -5,7 +5,7 @@
   <body>
       <div class="box">
           <p>Wyślij komunikat do Krzysia</p>
-          <input class="message" type="text" @keyup.enter="postMessage">
+          <input class="message" type="text" @keyup.enter="postMessage($event.target.value)">
       </div>
       <div class="box">
         <p>Parametry Krzysia</p>
@@ -21,17 +21,19 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import { ref } from "vue";
 
 const API_URL = 'http://localhost:8080';
 
 const Krzys = ref({
-  id: 0,
-  energia: 100,
-  tetno: 60,
-  temperatura: 36.6,
-  nastroj: "szczęśliwy"
+  energia: 0,
+  tetno: 0,
+  temperatura: 0.0,
+  nastroj: ""
 });
+fetchVitals();
+
+// ChartJS.register()
 
 async function fetchVitals() {
   try {
@@ -43,7 +45,18 @@ async function fetchVitals() {
   }
 }
 
-async function postMessage(content) {}
+async function postMessage(content) {
+  try {
+    const request = await fetch(`${API_URL}/message`, {
+      method: 'POST',
+      body: content.value
+    })
+    console.log(`Message send: ${content}`)
+    console.log(typeof content)
+  } catch (error) {
+    console.log(error);
+  }
+}
 </script>
 
 <style scoped>
