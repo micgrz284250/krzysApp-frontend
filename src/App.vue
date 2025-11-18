@@ -1,9 +1,9 @@
 <script setup>
-import KrzysView from "./components/KrzysView.vue";
+import Krzys from "./components/Krzys.vue";
 </script>
 
 <template>
-  <KrzysView/>
+  <Krzys/>
 </template>
 
 <style scoped>
