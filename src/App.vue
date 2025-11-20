@@ -1,5 +1,5 @@
 <script setup>
-import Krzys from "./components/Krzys.vue";
+  import Krzys from "./components/Krzys.vue";
 </script>
 
 <template>

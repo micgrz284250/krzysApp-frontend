@@ -5,9 +5,10 @@
   <body>
       <div class="box">
           <p>Wyślij komunikat do Krzysia</p>
-          <input class="message" type="text" @keyup.enter="postMessage($event.target.value)">
+          <input class="message" v-model="message" type="text" @keyup.enter="postMessage($event.target.value)">
       </div>
       <div class="box">
+        <BarChart/>
         <p>Parametry Krzysia</p>
         <section class="parameter">
           <p>Energia: {{Krzys.energia}}</p>
@@ -15,13 +16,14 @@
           <p>Temperatura: {{Krzys.temperatura}}</p>
           <p>Nastrój: {{Krzys.nastroj}}</p>
         </section>
-        <button class="parameter" @click="fetchVitals">Odśwież parametry życiowe Krzysia</button>
+<!--        <button class="parameter" @click="fetchVitals">Odśwież parametry życiowe Krzysia</button>-->
       </div>
   </body>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {onMounted, ref, useTemplateRef} from "vue";
+import BarChart from "./Chart.vue";
 
 const API_URL = 'http://localhost:8080';
 
@@ -31,7 +33,8 @@ const Krzys = ref({
   temperatura: 0.0,
   nastroj: ""
 });
-fetchVitals();
+
+const message = ref()
 
 async function fetchVitals() {
   try {
@@ -45,16 +48,24 @@ async function fetchVitals() {
 
 async function postMessage(content) {
   try {
-    const request = await fetch(`${API_URL}/message`, {
+    await fetch(`${API_URL}/message`, {
       method: 'POST',
-      body: content.value
+      body: content
     })
     console.log(`Message send: ${content}`)
     console.log(typeof content)
   } catch (error) {
     console.log(error);
   }
+  message.value='';
 }
+
+onMounted( () => {
+  setInterval( () => {
+    setTimeout(fetchVitals, 1000);
+  }, 15000);
+});
+
 </script>
 
 <style scoped>
