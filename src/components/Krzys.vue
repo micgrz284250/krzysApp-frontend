@@ -8,7 +8,7 @@
           <input class="message" v-model="message" type="text" @keyup.enter="postMessage($event.target.value)">
       </div>
       <div class="box">
-        <BarChart/>
+        <BarChart ref="BarChartRef" />
         <p>Parametry Krzysia</p>
         <section class="parameter">
           <p>Energia: {{Krzys.energia}}</p>
@@ -22,12 +22,13 @@
 </template>
 
 <script setup>
-import {onMounted, ref, useTemplateRef} from "vue";
+import {onMounted, ref} from "vue";
 import BarChart from "./Chart.vue";
 
 const API_URL = 'http://localhost:8080';
 
 const Krzys = ref({
+  id: 0,
   energia: 0,
   tetno: 0,
   temperatura: 0.0,
@@ -36,11 +37,15 @@ const Krzys = ref({
 
 const message = ref()
 
+const BarChartRef = ref(null);
+
 async function fetchVitals() {
   try {
     const response = await fetch(`${API_URL}/vitals`);
     Krzys.value = await response.json();
-    console.log(Krzys);
+    console.log(Krzys.value);
+    // przekażemy aktualne dane Krzysia do wykresu
+    BarChartRef.value.updateChart(Krzys);
   } catch (error) {
     console.log(error);
   }
