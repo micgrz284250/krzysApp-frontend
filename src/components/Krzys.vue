@@ -68,7 +68,7 @@ async function postMessage(content) {
 onMounted( () => {
   setInterval( () => {
     setTimeout(fetchVitals, 1000);
-  }, 15000);
+  }, 10000);
 });
 
 </script>

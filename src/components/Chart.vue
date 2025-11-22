@@ -1,9 +1,27 @@
 <template>
-  <Line
-      ref="vitalsChartRef"
-      :data="chartData"
-      :options="chartOptions"
-  />
+  <div class="chart-container">
+    <div>
+      <Line
+          id="energiaChart"
+          :data="energiaData"
+          :options="chartOptions"
+      />
+    </div>
+    <div>
+      <Line
+          ref="tetnoChart"
+          :data="tetnoData"
+          :options="chartOptions"
+      />
+    </div>
+    <div>
+      <Line
+          ref="temperaturaChart"
+          :data="temperaturaData"
+          :options="chartOptions"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -15,30 +33,32 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 defineExpose({ updateChart })
 
-const vitalsChartRef = ref(null)
-
-const chartData = ref({
+const energiaData = ref({
   labels: [0, 0, 0, 0, 0],
-  datasets: [
-    {
-      label: 'Energia',
-      backgroundColor: '#ff0000',
-      borderColor: '#ff0000',
-      data: [0, 0, 0, 0, 0]
-    },
-    {
-      label: 'Tętno',
-      backgroundColor: '#0000ff',
-      borderColor: '#0000ff',
-      data: [0, 0, 0, 0, 0]
-    },
-    {
-      label: 'Temperatura',
-      backgroundColor: '#00ff00',
-      borderColor: '#00ff00',
-      data: [0, 0, 0, 0, 0]
-    }
-  ]
+  datasets: [{
+    label: 'Energia',
+    backgroundColor: '#ff0000',
+    borderColor: '#ff0000',
+    data: [0, 0, 0, 0, 0]
+  }]
+});
+const tetnoData = ref({
+  labels: [0, 0, 0, 0, 0],
+  datasets: [{
+    label: 'Tętno',
+    backgroundColor: '#0000ff',
+    borderColor: '#0000ff',
+    data: [0, 0, 0, 0, 0]
+  }]
+});
+const temperaturaData = ref({
+  labels: [],
+  datasets: [{
+    label: 'Temperatura',
+    backgroundColor: '#00ff00',
+    borderColor: '#00ff00',
+    data: []
+  }]
 });
 
 const chartOptions = {
@@ -47,54 +67,61 @@ const chartOptions = {
 
 function updateChart(krzys) {
 
-  const newLabels = [... chartData.value.labels];
-  const newDataEnergia = [... chartData.value.datasets[0].data];
-  const newDataTetno = [... chartData.value.datasets[1].data];
-  const newDataTemperatura = [... chartData.value.datasets[2].data];
+  const newLabels = [... energiaData.value.labels];
+  const newDataEnergia = [... energiaData.value.datasets[0].data];
+  const newDataTetno = [... tetnoData.value.datasets[0].data];
+  const newDataTemperatura = [... temperaturaData.value.datasets[0].data];
 
-  if (chartData.value.labels.length >= 5){
-    newLabels.shift()
-    newDataEnergia.shift()
-    newDataTetno.shift()
-    newDataTemperatura.shift()
-  }
+  newLabels.shift()
+  newDataEnergia.shift()
+  newDataTetno.shift()
+  newDataTemperatura.shift()
+
   newLabels.push(krzys.value.id);
-  chartData.value.labels = newLabels;
+
   // Energia
   newDataEnergia.push(krzys.value.energia);
-  chartData.value.datasets[0].data = newDataEnergia;
   // Tętno
   newDataTetno.push(krzys.value.tetno);
-  chartData.value.datasets[1].data = newDataTetno;
   // Temperatura
   newDataTemperatura.push(krzys.value.temperatura);
-  chartData.value.datasets[2].data = newDataTemperatura;
 
-  console.log(chartData.value);
-
-  chartData.value = {
+  energiaData.value = {
     labels: newLabels,
-    datasets: [
-      {
-        label: 'Energia',
-        backgroundColor: '#ff0000',
-        borderColor: '#ff0000',
-        data: newDataEnergia
-      },
-      {
-        label: 'Tętno',
-        backgroundColor: '#0000ff',
-        borderColor: '#0000ff',
-        data: newDataTetno
-      },
-      {
-        label: 'Temperatura',
-        backgroundColor: '#00ff00',
-        borderColor: '#00ff00',
-        data: newDataTemperatura
-      }
-    ]
-  }
+    datasets: [{
+      label: 'Energia',
+      backgroundColor: '#ff0000',
+      borderColor: '#ff0000',
+      data: newDataEnergia
+    }]
+  };
+  tetnoData.value = {
+    labels: newLabels,
+    datasets: [{
+      label: 'Tętno',
+      backgroundColor: '#0000ff',
+      borderColor: '#0000ff',
+      data: newDataTetno
+    }]
+  };
+  temperaturaData.value = {
+    labels: newLabels,
+    datasets: [{
+      label: 'Temperatura',
+      backgroundColor: '#00ff00',
+      borderColor: '#00ff00',
+      data: newDataTemperatura
+    }]
+  };
 }
 
 </script>
+
+<style scoped>
+.chart-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+</style>
