@@ -33,28 +33,4 @@ function formatNastroj(nastroj) {
 </script>
 
 <style scoped>
-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: black;
-  background-color: gray;
-  border-radius: 10px;
-}
-
-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-  align-items: center;
-  height: 50vh;
-}
-
-.box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
 </style>

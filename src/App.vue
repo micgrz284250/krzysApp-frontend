@@ -53,4 +53,38 @@
 </script>
 
 <style scoped>
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  background-color: gray;
+  border-radius: 10px;
+  font-family: "JetBrains Mono", monospace;
+  padding: 5px;
+  margin: 10px;
+}
+
+header h1 {
+  font-size: 30px;
+}
+
+header a {
+  font-size: 20px;
+  color: darkblue;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  header a:hover {
+    color: aqua;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 </style>
