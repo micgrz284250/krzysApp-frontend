@@ -4,21 +4,21 @@
       <Line
           id="energiaChart"
           :data="energiaData"
-          :options="chartOptions"
+          :options="energiaChartOptions"
       />
     </div>
     <div>
       <Line
           ref="tetnoChart"
           :data="tetnoData"
-          :options="chartOptions"
+          :options="tetnoChartOptions"
       />
     </div>
     <div>
       <Line
           ref="temperaturaChart"
           :data="temperaturaData"
-          :options="chartOptions"
+          :options="temperaturaChartOptions"
       />
     </div>
   </div>
@@ -34,21 +34,21 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 defineExpose({ updateChart })
 
 const energiaData = ref({
-  labels: [0, 0, 0, 0, 0],
+  labels: [],
   datasets: [{
     label: 'Energia',
     backgroundColor: '#ff0000',
     borderColor: '#ff0000',
-    data: [0, 0, 0, 0, 0]
+    data: []
   }]
 });
 const tetnoData = ref({
-  labels: [0, 0, 0, 0, 0],
+  labels: [],
   datasets: [{
     label: 'Tętno',
     backgroundColor: '#0000ff',
     borderColor: '#0000ff',
-    data: [0, 0, 0, 0, 0]
+    data: []
   }]
 });
 const temperaturaData = ref({
@@ -61,8 +61,32 @@ const temperaturaData = ref({
   }]
 });
 
-const chartOptions = {
-  responsive: true
+const energiaChartOptions = {
+  responsive: true,
+  scales: {
+    y: {
+      min: 0,
+      max: 100,
+    }
+  }
+}
+const tetnoChartOptions = {
+  responsive: true,
+  scales: {
+    y: {
+      min: 0,
+      max: 200,
+    }
+  }
+}
+const temperaturaChartOptions = {
+  responsive: true,
+  scales: {
+    y: {
+      min: 0,
+      max: 50,
+    }
+  }
 }
 
 function updateChart(krzys) {
@@ -72,13 +96,17 @@ function updateChart(krzys) {
   const newDataTetno = [... tetnoData.value.datasets[0].data];
   const newDataTemperatura = [... temperaturaData.value.datasets[0].data];
 
-  newLabels.shift()
-  newDataEnergia.shift()
-  newDataTetno.shift()
-  newDataTemperatura.shift()
+  if (newLabels.length >= 5) {
+    newLabels.shift()
+    newDataEnergia.shift()
+    newDataTetno.shift()
+    newDataTemperatura.shift()
+  }
 
-  newLabels.push(krzys.value.id);
+  const time = new Date(krzys.value.dateTime);
 
+  newLabels.push(time.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' , second: '2-digit' }));
+  console.log(typeof krzys.value.dateTime);
   // Energia
   newDataEnergia.push(krzys.value.energia);
   // Tętno
