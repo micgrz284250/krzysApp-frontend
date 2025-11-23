@@ -67,7 +67,7 @@ link do bazy jest też dostępny w aplikacji
 
 ![baza danych](md_src/database.png)
 
-#Wykorzystane technologie
+# Wykorzystane technologie
 
 * Spring Boot 
 * Gradle
@@ -101,3 +101,7 @@ src/main/java/micgrz/krzysbackend/Controller.java
 ``
 
 na poprawny adres
+
+Minimalna wersja Node.js wymagana to: 22.12.0
+
+Wymagana wersja JDK to: 25
