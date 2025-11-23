@@ -1,7 +1,5 @@
 # Zadanie 3 - Aplikacja Kontroli Misji
 
-This template should help get you started developing with Vue 3 in Vite.
-
 # Jak uruchomić projekt
 W celu pełnego działania aplikacji należy uruchomić:
 * backend - https://github.com/micgrz284250/krzysApp-backend
