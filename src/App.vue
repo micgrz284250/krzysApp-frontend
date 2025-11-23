@@ -61,9 +61,7 @@ header {
   color: black;
   background-color: gray;
   border-radius: 10px;
-  font-family: "JetBrains Mono", monospace;
   padding: 5px;
-  margin: 10px;
 }
 
 header h1 {

@@ -1,22 +1,19 @@
 <template>
   <div class="chart-container">
-    <div>
+    <div class="chart">
       <Line
-          id="energiaChart"
           :data="energiaData"
           :options="energiaChartOptions"
       />
     </div>
-    <div>
+    <div class="chart">
       <Line
-          ref="tetnoChart"
           :data="tetnoData"
           :options="tetnoChartOptions"
       />
     </div>
-    <div>
+    <div class="chart">
       <Line
-          ref="temperaturaChart"
           :data="temperaturaData"
           :options="temperaturaChartOptions"
       />
@@ -63,28 +60,94 @@ const temperaturaData = ref({
 
 const energiaChartOptions = {
   responsive: true,
+  plugins: {
+    title: {
+      display: true,
+      text: 'Energia',
+      color: 'white',
+      font: {
+        size: 16,
+        family: "'JetBrains Mono', 'Segoe UI', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
+      },
+    },
+    legend: {
+      display: false
+    },
+  },
   scales: {
     y: {
+      ticks: {
+        color: 'white'
+      },
       min: 0,
       max: 100,
+    },
+    x: {
+      ticks: {
+        color: 'white'
+      }
     }
   }
 }
 const tetnoChartOptions = {
   responsive: true,
+  plugins: {
+    title: {
+      display: true,
+      text: 'Energia',
+      color: 'white',
+      font: {
+        size: 16,
+        family: "'JetBrains Mono', 'Segoe UI', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
+      },
+    },
+    legend: {
+      display: false
+    },
+  },
   scales: {
     y: {
+      ticks: {
+        color: 'white'
+      },
       min: 0,
       max: 200,
+    },
+    x: {
+      ticks: {
+        color: 'white'
+      }
     }
   }
 }
 const temperaturaChartOptions = {
   responsive: true,
+  plugins: {
+    title: {
+      display: true,
+      text: 'Energia',
+      color: 'white',
+      font: {
+        size: 16,
+        family: "'JetBrains Mono', 'Segoe UI', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
+      },
+    },
+    legend: {
+      display: false
+    },
+  },
   scales: {
     y: {
+      ticks: {
+        color: 'white'
+      },
       min: 0,
       max: 50,
+    },
+    x: {
+      ticks: {
+        color: 'white'
+      }
     }
   }
 }
@@ -150,5 +213,11 @@ function updateChart(krzys) {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
+  margin: 20px;
+}
+
+.chart {
+  width: 30vw;
+  margin: 10px;
 }
 </style>

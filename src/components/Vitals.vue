@@ -1,12 +1,12 @@
 <template>
-  <div class="box">
-    <p>Parametry Krzysia</p>
-    <section class="parameter">
-      <p>Energia: {{energia}}</p>
-      <p>Tętno: {{tetno}}</p>
-      <p>Temperatura: {{temperatura}}</p>
+  <div class="vitals-container">
+    <h3>Parametry Krzysia</h3>
+    <div class="parameter">
+      <p>Energia: {{ energia }}</p>
+      <p>Tętno: {{ tetno }}</p>
+      <p>Temperatura: {{ temperatura }}</p>
       <p>Nastrój: {{ formatNastroj(nastroj) }}</p>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -33,4 +33,11 @@ function formatNastroj(nastroj) {
 </script>
 
 <style scoped>
+.vitals-container {
+  margin: 10px;
+  background-color: gray;
+  color: black;
+  border-radius: 10px;
+  padding: 10px;
+}
 </style>

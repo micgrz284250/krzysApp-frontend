@@ -30,6 +30,55 @@ npm install
 npm run dev
 ``
 
+# Podstawowe zdolności systemu
+
+Aplikacja pozwala nam śledzić parametry życiowe kosmity Krzysia
+
+Wyświetlane parametry odświeżają się co 5 sekund i pokazywane sa w formie prostej tabelki
+
+![tabela z parametrami](md_src/vitals.png)
+
+Dodatkowo aplikacja pokazuje wykres liniowy dla każdego parametru z 5 ostatnich odczytów
+
+![wykresy](md_src/charts.png)
+
+Ostatnią funkcją jest możliwość wysłania wiadomości do naszego kosmity
+
+**Kosmita Krzyś**
+
+Za generowanie parametrów życiowych Krzysia odpowiada klasa 
+
+``
+src/main/java/micgrz/krzysbackend/Krzys.java
+``
+
+## Baza danych
+
+Aplikacja korzysta z bazy danych która przechowuje wszystkie wiadomości przesłane do Krzysia oraz historię wszystkich odczytanych parametrów
+W celu otwarcia bazy danych należy wejść pod adres
+
+http://localhost:8080/h2-console
+
+i zalogować się:
+* login: sa
+* haslo: 
+
+link do bazy jest też dostępny w aplikacji
+
+![baza danych](md_src/database.png)
+
+#Wykorzystane technologie
+
+* Spring Boot 
+* Gradle
+* Lombok
+* H2
+* Vite
+* Vue 3
+
+Autor:
+**Michał Grzebielec**
+
 ## Dodatkowe uwagi
 
 Domyślnym portem dla backendu jest http://localhost:8080 (domyślny port Spring Boot)
@@ -52,43 +101,3 @@ src/main/java/micgrz/krzysbackend/Controller.java
 ``
 
 na poprawny adres
-
-# Podstawowe zdolności systemu
-
-Aplikacja pozwala nam śledzić parametry życiowe kosmity Krzysia
-
-Wyświetlane parametry odświeżają się co 5 sekund i pokazywane sa w formie prostej tabelki
-
-![tabela z parametrami](md_src/vitals.png)
-
-Dodatkowo aplikacja pokazuje wykres liniowy dla każdego parametru z 5 ostatnich odczytów
-
-![wykresy](md_src/charts.png)
-
-Ostatnią funkcją jest możliwość wysłania wiadomości do naszego kosmity
-
-## Baza danych
-
-Aplikacja korzysta z bazy danych która przechowuje wszystkie wiadomości przesłane do Krzysia oraz historię wszystkich odczytanych parametrów
-W celu otwarcia bazy danych należy wejść pod adres
-
-http://localhost:8080/h2-console
-
-i zalogować się:
-* login: sa
-* haslo: 
-
-link do bazy jest też dostępny w aplikacji
-
-![baza danych](md_src/database.png)
-
-#Wykorzystane technologie
-
-* Spring Boot
-* Gradle
-* Vite
-* Vue 3
-* H2
-
-Autor:
-Michał Grzebielec

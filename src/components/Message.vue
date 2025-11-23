@@ -1,3 +1,12 @@
+<template>
+  <div class="message-container">
+    <h3>Wyślij komunikat do Krzysia</h3>
+    <input class="message" v-model="messageInput" type="text" @keyup.enter="postMessage($event.target.value)">
+    <p v-show="flag" class="message-info">Wysłano wiadomość do Krzysia</p>
+    <p v-show="flag" class="message-info">Treść wiadomości: {{ messageDisplay }}</p>
+  </div>
+</template>
+
 <script setup>
 
 import {inject, ref} from "vue";
@@ -6,7 +15,7 @@ const API_URL = inject('API_URL');
 
 const messageInput = ref("");
 const messageDisplay = ref("");
-let flag = false;
+const flag = ref(false);
 
 async function postMessage(content) {
   try {
@@ -17,10 +26,10 @@ async function postMessage(content) {
     console.log(`Message send: ${messageInput.value}`)
     console.log(typeof content)
     messageDisplay.value = content;
-    flag = true;
+    flag.value = true;
     setTimeout(() => {
       console.log("flag reset")
-      flag = false;
+      flag.value = false;
     }, 3000);
   } catch (error) {
     console.log(error);
@@ -30,13 +39,9 @@ async function postMessage(content) {
 
 </script>
 
-<template>
-  <p>Wyślij komunikat do Krzysia</p>
-  <input class="message" v-model="messageInput" type="text" @keyup.enter="postMessage($event.target.value)">
-  <p v-show="flag" class="message">Wysłano wiadomość do Krzysia</p>
-  <p v-show="flag" class="message">Treść wiadomości: {{ messageDisplay }}</p>
-</template>
-
 <style scoped>
-
+.message-container {
+  display: flex;
+  flex-direction: column;
+}
 </style>
