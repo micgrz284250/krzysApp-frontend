@@ -94,7 +94,7 @@ const tetnoChartOptions = {
   plugins: {
     title: {
       display: true,
-      text: 'Energia',
+      text: 'Tętno',
       color: 'white',
       font: {
         size: 16,
@@ -125,7 +125,7 @@ const temperaturaChartOptions = {
   plugins: {
     title: {
       display: true,
-      text: 'Energia',
+      text: 'Temperatura',
       color: 'white',
       font: {
         size: 16,
